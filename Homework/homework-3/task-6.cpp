@@ -70,7 +70,6 @@ int main() {
 	int minIndex = findIndex(min, n, arr);
 
 	cout << "Modified array" << endl;
-	cout << minIndex << " " << maxIndex << endl;
 	if ((minIndex == 1) && (maxIndex == 0)) {
 		map(divider, n, arr);
 		
