@@ -1,4 +1,5 @@
 #include <iostream>
+#include <functional>
 
 using namespace std;
 
@@ -33,7 +34,8 @@ double findMin(int len, double arr[]) {
 	return min;
 }
 
-void map(double func(double num), int len, double arr[]) {
+template <typename Func>
+void map(Func func, int len, double arr[]) {
 	for (int i = 0; i < len; i++) {
 		arr[i] = func(arr[i]);
 	}
