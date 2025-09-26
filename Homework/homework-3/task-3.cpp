@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int findIndex(int num, int len, int arr[]) {
+int findIndex(double num, int len, double arr[]) {
 
 	for (int i = 0; i < len; i++) {
 		if (num == arr[i]) {
@@ -14,8 +14,8 @@ int findIndex(int num, int len, int arr[]) {
 	return -1;
 }
 
-int findMax(int len, int arr[]) {
-	int max = arr[0];
+double findMax(int len, double arr[]) {
+	double max = arr[0];
 	for (int i = 1; i < len; i++) {
 		if (max < arr[i]) {
 			max = arr[i];
@@ -24,8 +24,8 @@ int findMax(int len, int arr[]) {
 	return max;
 }
 
-int findMin(int len, int arr[]) {
-	int min = arr[0];
+double findMin(int len, double arr[]) {
+	double min = arr[0];
 	for (int i = 1; i < len; i++) {
 		if (min > arr[i]) {
 			min = arr[i];
@@ -34,7 +34,7 @@ int findMin(int len, int arr[]) {
 	return min;
 }
 
-void showArray(int len, int arr[]) {
+void showArray(int len, double arr[]) {
 	for (int i = 0; i < len; i++) {
 		cout << arr[i] << " ";
 	}
@@ -43,7 +43,7 @@ void showArray(int len, int arr[]) {
 
 int main() {
 	const int n = 15;
-	int arr[n];
+	double arr[n];
 
 	cout << "Input array" << endl;
 	for (int i = 0; i < n; i++) {
@@ -52,11 +52,11 @@ int main() {
 	
 	showArray(n, arr);
 
-	int max = findMax(n, arr);
+	double max = findMax(n, arr);
 	int maxIndex = findIndex(max, n, arr);
 	swap(arr[n-1], arr[maxIndex]);
 
-	int min = findMin(n, arr);
+	double min = findMin(n, arr);
 	int minIndex = findIndex(min, n, arr);
 	swap(arr[0], arr[minIndex]); 
 
