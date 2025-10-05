@@ -30,7 +30,7 @@ int main() {
     if ((cp1 * cp2 < 0) && (cp3 * cp4 < 0)) {
         isInsert = true;
     } 
-    else if ((cp1 * cp2 == 0) && (cp3 * cp4 == 0)){
+    else if ((cp1 * cp2 == 0) || (cp3 * cp4 == 0)){
         double AB = dist(x1, y1, x2, y2);
         double AC = dist(x1, y1, x3, y3);
         double AD = dist(x1, y1, x4, y4);
