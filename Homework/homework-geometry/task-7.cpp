@@ -7,47 +7,55 @@ struct dot {
     double x,y;
 };
 
-int rotate(int x1, int y1, int x2, int y2, int dotx, int doty) {
-    int opr = (x2 - x1) * (doty - y1) - (y2 - y1) * (dotx - x1);
-    if (opr > 0) return 1;
-    if (opr < 0) return -1;
-    return 0; 
+double findXCord(dot d1, dot d2, dot d3) {
+
+    return (d2.x - d1.x) * (d3.y - d1.y) / (d2.y - d1.y) + d1.x;
 }
 
-bool isInside(dot dots[], int n, double dotx, double doty) {
-    int sign = 0;
-    bool onEdge = false;
+bool isInside(dot dots[], int n, dot mainDot) {
+    int counter = 0;
 
     for (int i = 0; i < n; ++i) {
-        int r = rotate(dots[i].x, dots[i].y, dots[(i+1)%n].x, dots[(i+1)%n].y, dotx, doty);
-        if (r == 0) onEdge = true; 
-        else if (sign == 0) sign = r; 
-        else if (r != 0 && r != sign) return false; 
+
+        // If edge is horizontal we skip it 
+        if (dots[i].y == dots[(i+1)%n].y) {
+            continue;
+        }
+
+        int x = findXCord(dots[i], dots[(i+1)%n], mainDot);
+
+        // In case dot is on the peak
+        if (x == dots[i].x) {
+            counter--;
+        }
+
+        if (mainDot.x < x) {
+            counter++;
+        }
     }
 
-    return true; 
+    return counter % 2 == 1; 
 }
 
 int main() {
     int n;
-    double dotx, doty;
+    dot mainDot;
 
-    
     cout << "Input num of peaks" << endl;
-    std::cin >> n;
-
-    cout << "Input dot cords" << endl;
-    std::cin >> dotx >> doty;
+    cin >> n;
 
     cout << "Input cords of peaks" << endl;
     dot* dots = new dot[n];
     for (int i = 0; i < n; ++i)
-        std::cin >> dots[i].x >> dots[i].y;
+        cin >> dots[i].x >> dots[i].y;
 
-    if (isInside(dots, n, dotx, doty))
-        std::cout << "Dot is incide";
+    cout << "Input dot cords" << endl;
+    cin >> mainDot.x >> mainDot.y;
+
+    if (isInside(dots, n, mainDot))
+        cout << "Dot is inside";
     else
-        std::cout << "Dot isn't incide";
+        cout << "Dot isn't inside";
 
     return 0;
 }
