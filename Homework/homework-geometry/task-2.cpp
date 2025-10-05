@@ -3,32 +3,46 @@
 
 using namespace std;
 
-double dist(double x1, double y1, double x2, double y2) {
-    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+struct dot {
+    double x, y;
+};
+
+double defineDotPosition(dot dx, dot d1, dot d2) {
+    return (d2.x - d1.x) * (dx.y - d1.y) - (d2.y - d1.y) * (dx.x - d1.x);
 }
 
-double perimeter(double dots[4][2]){
-    double perimeter = 0.0;
-    for (int i = 0; i < 4; ++i) {
-        int j = (i + 1) % 4;
-        perimeter += dist(dots[i][0], dots[i][1], dots[j][0], dots[j][1]);
-    }    
-    return perimeter;
-    
+double dist(dot d1, dot d2) {
+    double dx = d1.x - d2.x;
+    double dy = d1.y - d2.y;
+    return sqrt(dx*dx + dy*dy);
 }
 
 int main() {
-    const int dots = 4;
-    const int cords = 2;
+    dot d1, d2, d3, d4; 
+    cin >> d1.x >> d1.y;
+    cin >> d2.x >> d2.y;
+    cin >> d3.x >> d3.y;
+    cin >> d4.x >> d4.y;
 
-    double arr[dots][cords];
+    dot dots[4] = {d1, d2, d3, d4};
 
-    double* p = *arr;
+    // Count all dists
+    double perimeter = dist(d1, d2) + dist(d1, d3) + dist(d1, d4) + dist(d2, d3) + dist(d2, d4) + dist(d3,d4);
 
-    for (int i = 0; i < dots*cords; i++) {
-        cin >> *(p + i);
+    // Find diag
+    if (defineDotPosition(d3, d1, d2) * defineDotPosition(d4, d1, d2) < 0) {
+        perimeter -= (dist(d1,d2) + dist(d3,d4));
+    }
+    
+    if (defineDotPosition(d2, d1, d3) * defineDotPosition(d4, d1, d3) < 0) {
+        perimeter -= (dist(d1,d3) + dist(d2,d4));
+    }
+    
+    if (defineDotPosition(d2, d1, d4) * defineDotPosition(d3, d1, d4) < 0) {
+        perimeter -= (dist(d1,d4) + dist(d2,d3));
     }
 
-    std::cout << "Perimeter is: " << perimeter(arr) << std::endl;
+    cout << "Perimeter is " << perimeter << endl;
+
     return 0;
 }
