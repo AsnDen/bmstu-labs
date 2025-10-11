@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <iomanip>
 #include <print>
 
 struct dot {
@@ -10,15 +9,6 @@ struct dot {
         return i == other.i && j == other.j;
     }
 };
-
-void showMatrix(const std::vector<std::vector<int>>& matrix) {
-    for (int i = 0; i < matrix.size(); i++){
-        for (int j = 0; j < matrix[i].size(); j++) {
-            std::cout << std::setw(5) << matrix[i][j];
-        }
-        std::cout << std::endl;
-    }
-}
 
 std::vector<dot> findRowMins(std::vector<std::vector<int>> matrix) {
     int n = matrix.size();
@@ -126,8 +116,6 @@ int main() {
             std::cin >> matrix[i][j];
         }
     }
-
-    showMatrix(matrix);
 
     std::vector<dot> rowMins = findRowMins(matrix);
     std::vector<dot> rowMaxs = findRowMaxs(matrix);
