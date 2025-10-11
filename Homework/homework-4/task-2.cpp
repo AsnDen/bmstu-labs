@@ -1,16 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <iomanip>
-
-void showMatrix(const std::vector<std::vector<int>>& matrix) {
-    for (int i = 0; i < matrix.size(); i++){
-        for (int j = 0; j < matrix[i].size(); j++) {
-            std::cout << std::setw(5) << matrix[i][j];
-        }
-        std::cout << std::endl;
-    }
-}
 
 std::vector<std::vector<int>> reflectMainDiagonal(std::vector<std::vector<int>> matrix) {
     std::vector<std::vector<int>> newMatrix = matrix;
