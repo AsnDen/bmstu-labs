@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <numbers>
+#include <cmath>
 
 struct dot{
     double x,y;
@@ -15,9 +16,9 @@ int main() {
     std::cout << "Input the angle" << std::endl;
     double angle;
     std::cin >> angle;
-    angle = angle * std::numbers::pi / 180; 
+    angle = angle * 3.14159265358979323846 / 180; 
 
-    std::cout << "Cords are: " << a.x*std::cos(angle) + a.x*std::sin(angle) << " " << -a.y*std::sin(angle) + a.y*std::cos(angle) << std::endl;
+    std::cout << "Cords are: " << a.x*std::cos(angle) + a.y*std::sin(angle) << " " << -a.x*std::sin(angle) + a.y*std::cos(angle) << std::endl;
 
     return 0;
 }
