@@ -25,7 +25,6 @@ int main(){
     }), vec.end());
 
     auto mima {std::minmax_element(vec.begin(), vec.end())};
-    double average {double(std::accumulate(vec.begin(), vec.end(), 0.0)) / vec.size()};
     
     printf("Min amount of fuel is %f\n", *mima.first);
 
