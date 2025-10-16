@@ -31,7 +31,5 @@ int main(){
         std::cout << "All temperatures are higher than -10 degrees" << std::endl;
     }
 
-    for (double v : vec) std::cout << v << " ";
-
     return 0;
 }
