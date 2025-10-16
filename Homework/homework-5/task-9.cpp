@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <numeric>
 
-double findMadian(std::vector<double> v) {
+double findMedian(std::vector<double> v) {
     if (v.size() % 2 == 0) {
         return (v[v.size()/2] + v[v.size()/2-1]) / 2;
     }
@@ -40,7 +40,7 @@ int main(){
     
     std::sort(vec.begin(), vec.end());
     
-    std::cout << "Median is " << findMadian(vec) << std::endl; //REDO
+    std::cout << "Median is " << findMedian(vec) << std::endl; //REDO
 
     return 0;
 }
