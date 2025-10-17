@@ -1,4 +1,4 @@
 #!/bin/bash
 
-ps
+ps -e
 ps aux | wc -l
