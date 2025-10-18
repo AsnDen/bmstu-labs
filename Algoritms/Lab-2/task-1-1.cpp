@@ -39,21 +39,18 @@ int main() {
     printf("%d words start with 'a'. %d is minumum length of word. %d letters 'a' in the last word. %d words have the same 1st and last characters\n",
         counter, mn, counterLast, counterSame);
     
-    for (int word = 0; word < WORDS; word++) {
-        int len = strlen(words[word]);
-
-        for (int ch = 0; ch < len; ch++) {
-            for (int newWord = word+1; newWord < WORDS; newWord++) {
-                char tm[2] {words[word][ch], '\0'};
-                if (newWord != word) {
-                    if (std::strstr(words[newWord], tm) != nullptr) {
-                        printf("The min substring is '%c'\n", words[word][ch]);
+    for (int word; word < WORDS - 1; word++) {
+        for (int anotherWord = word + 1; anotherWord < WORDS; anotherWord++) {
+            int ln = strlen(words[word]);
+            for (int j = 0; j < ln-2; j++) {
+                char temp[] {words[word][j], words[word][j+1], '\0'};
+                if (std::strstr(words[anotherWord], temp) != nullptr) {
+                        printf("The min substring is '%s'\n", temp);
                         return 0;
                     }
-                }
             }
         }
-    }
+    } 
 
     printf("There is no substring to find.");
 
