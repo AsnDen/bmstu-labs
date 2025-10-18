@@ -1,17 +1,10 @@
 #include <iostream>
 #include <cstring>
 
-void stringToLower(char str[]) {
-    int len {int(strlen(str))};
-
-    for (int i = 0; i < len; i++) str[i] = tolower(str[i]);
-}
-
 int main() {
 
     char str[100];
     std::cin.getline(str, 100);
-    stringToLower(str);
 
     int len {int(strlen(str))};
     int counter {1};
