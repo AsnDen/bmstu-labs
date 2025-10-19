@@ -32,18 +32,26 @@ int main(){
         }
     }
 
-
     std::vector<double> t_average(c);
 
     std::transform(temp.begin(), temp.end(), t_average.begin(), [](std::vector<double> v){
         return std::accumulate(v.begin(), v.end(), 0.0) / v.size();
     });
 
+    for (int i = 0; i < c; i++) {
+        printf("Average temp channel %d: %f\n", i+1, t_average[i]);
+    }
+
     std::vector<std::pair<std::vector<double>::iterator, std::vector<double>::iterator>> p_mima(c);
 
     std::transform(pressure.begin(), pressure.end(), p_mima.begin(), [](std::vector<double> v){
         return std::minmax_element(v.begin(), v.end());
     });
+
+    for (int i = 0; i < c; i++) {
+        auto [min_it, max_it] = p_mima[i];
+        printf("Pressure channel %d: min=%f, max=%f\n", i+1, *min_it, *max_it);
+    }
 
     std::vector<std::vector<double>> t_dev(c, std::vector<double>(t-1));
 
@@ -64,6 +72,9 @@ int main(){
         return *mima.second - *mima.first;
     });
 
+    int max_diff_index = std::distance(t_difference.begin(), std::max_element(t_difference.begin(), t_difference.end()));
+    printf("Channel with max temperature variation: %d\n", max_diff_index + 1);
+
     for (int i = 0; i < c; ++i) {
         auto [min_it, max_it] = p_mima[i];
         double minv = *min_it, maxv = *max_it;
@@ -72,15 +83,21 @@ int main(){
     }
 
     std::for_each(pressure.begin(), pressure.end(), [](std::vector<double> v){
-        std::for_each(v.begin(), v.end(), [](double x){
-            if  (x > 0.9) printf("%f ", x);});
+        for (double x : v) {
+            if (x > 0.9) printf("%f ", x);
+        }
+        printf("\n");
     });
     
-
     auto max_it = std::max_element(t_average.begin(), t_average.end());
     int max_index = std::distance(t_average.begin(), max_it);
-    printf("\nMax avarage temp is: %d\n", max_index + 1);
+    printf("Max average temp is channel: %d\n", max_index + 1);
+
     std::sort(t_average.begin(), t_average.end());
+
+    printf("Sorted average temperatures: ");
+    for (double x : t_average) printf("%f ", x);
+    printf("\n");
 
     return 0;
 }
