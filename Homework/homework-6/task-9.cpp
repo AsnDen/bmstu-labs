@@ -38,7 +38,8 @@ int main() {
 
     ans[index] = '\0';
 
+    std::reverse(ans, ans + index);
 
-    printf("%s", strrev(ans));
+    printf("%s", ans);
 
 }
